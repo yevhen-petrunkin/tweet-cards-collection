@@ -35,12 +35,12 @@ export class Card extends Component {
   };
 
   localStorageSetter = object => {
-    localStorage.setItem('state', JSON.stringify(object));
+    localStorage.setItem('picks', JSON.stringify(object));
   };
 
   componentDidMount() {
     try {
-      let storageData = JSON.parse(localStorage.getItem('state'));
+      let storageData = JSON.parse(localStorage.getItem('picks'));
       if (storageData) {
         if (storageData.some(entry => entry.id === this.props.userdata.id)) {
           const newEntry = storageData.find(
@@ -64,7 +64,7 @@ export class Card extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
       try {
-        let storageData = JSON.parse(localStorage.getItem('state'));
+        let storageData = JSON.parse(localStorage.getItem('picks'));
         if (storageData) {
           if (storageData.some(entry => entry.id === this.props.userdata.id)) {
             const newEntry = { id: this.props.userdata.id, ...this.state };
