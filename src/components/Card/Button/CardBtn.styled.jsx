@@ -30,7 +30,9 @@ const btnhover = keyframes`{
 
 export const Button = styled.button`
   margin: ${p => p.theme.space[1]}px;
-  padding: ${p => p.theme.space[4]}px ${p => p.theme.space[15]}px;
+  padding: ${p => p.theme.space[4]}px;
+  width: ${p => p.theme.sizes[12]}px;
+  box-sizing: border-box;
   font-size: ${p => p.theme.fontSizes[0]}px;
   font-weight: ${p => p.theme.fontWeights[1]};
   line-height: ${p => p.theme.lineHeights[0]}px;
@@ -46,7 +48,7 @@ export const Button = styled.button`
 
   &:hover,
   &:active {
-    padding: ${p => p.theme.space[2]}px ${p => p.theme.space[14]}px;
+    padding: ${p => p.theme.space[2]}px;
     border: ${p => p.theme.borders.btnHoverBdr};
     background-color: ${p => p.theme.colors.accentColor};
     animation: ${btnhover} linear 1200ms 1;

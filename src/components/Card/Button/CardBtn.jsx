@@ -7,7 +7,7 @@ export const CardBtn = ({ text, type, isActive, onClick }) => {
       onClick={onClick}
       style={{ backgroundColor: '#5cd3a8' }}
     >
-      {text}
+      Following
     </Button>
   ) : (
     <Button type={type} onClick={onClick}>
