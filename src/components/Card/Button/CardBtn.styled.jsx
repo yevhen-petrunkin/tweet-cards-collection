@@ -45,7 +45,7 @@ export const Button = styled.button`
   transition: color linear 300ms, background-color linear 400ms;
 
   &:hover,
-  &:focus {
+  &:active {
     padding: ${p => p.theme.space[2]}px ${p => p.theme.space[14]}px;
     border: ${p => p.theme.borders.btnHoverBdr};
     background-color: ${p => p.theme.colors.accentColor};
