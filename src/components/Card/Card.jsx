@@ -16,31 +16,46 @@ import { CardBtn } from './Button/CardBtn';
 export class Card extends Component {
   state = {
     isCardActive: false,
-    tweetCount: 777,
-    followerCount: 100500,
+    followerCount: this.props.userdata.followers,
   };
 
   clickHandler = () => {
     if (this.state.isCardActive) {
       this.setState({
         isCardActive: false,
-        tweetCount: this.state.tweetCount - 1,
         followerCount: this.state.followerCount - 1,
       });
       return;
     }
     this.setState({
       isCardActive: true,
-      tweetCount: this.state.tweetCount + 1,
       followerCount: this.state.followerCount + 1,
     });
     return;
   };
 
+  localStorageSetter = object => {
+    localStorage.setItem('state', JSON.stringify(object));
+  };
+
   componentDidMount() {
     try {
-      const storageData = JSON.parse(localStorage.getItem('state'));
-      this.setState(storageData);
+      let storageData = JSON.parse(localStorage.getItem('state'));
+      if (storageData) {
+        if (storageData.some(entry => entry.id === this.props.userdata.id)) {
+          const newEntry = storageData.find(
+            entry => entry.id === this.props.userdata.id
+          );
+          this.setState({
+            isCardActive: newEntry.isCardActive,
+            followerCount: newEntry.followerCount,
+          });
+          return;
+        }
+        return;
+      }
+      storageData = [];
+      this.localStorageSetter(storageData);
     } catch (error) {
       console.log(error.message);
     }
@@ -48,11 +63,35 @@ export class Card extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
-      localStorage.setItem('state', JSON.stringify(this.state));
+      try {
+        let storageData = JSON.parse(localStorage.getItem('state'));
+        if (storageData) {
+          if (storageData.some(entry => entry.id === this.props.userdata.id)) {
+            const newEntry = { id: this.props.userdata.id, ...this.state };
+            const index = storageData.findIndex(
+              entry => entry.id === this.props.userdata.id
+            );
+            storageData.splice(index, 1, newEntry);
+            this.localStorageSetter(storageData);
+            return;
+          }
+          const newEntry = { id: this.props.userdata.id, ...this.state };
+          storageData.push(newEntry);
+          this.localStorageSetter(storageData);
+          return;
+        }
+        storageData = [];
+        this.localStorageSetter(storageData);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   }
 
   render() {
+    const { user, tweets, avatar } = this.props.userdata;
+    const { followerCount } = this.state;
+
     return (
       <Article>
         <TitleBox>
@@ -70,16 +109,13 @@ export class Card extends Component {
         </UpperBox>
         <MiddleBox>
           <PhotoBox>
-            <Photo
-              src={require('../../images/hansel.png').default}
-              alt="UserPhoto"
-            />
+            <Photo src={avatar} alt={user} />
           </PhotoBox>
         </MiddleBox>
         <LowerBox>
-          <TweetCount twCount={this.state.tweetCount} />
+          <TweetCount twCount={tweets} />
           <FollowerCount
-            follCount={this.state.followerCount.toLocaleString('en-EN')}
+            follCount={Number(followerCount).toLocaleString('en-EN')}
           />
           <CardBtn
             type="button"
