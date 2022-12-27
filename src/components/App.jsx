@@ -1,16 +1,19 @@
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../utils/theme';
+import { Box } from './Box';
+import { MainTitle } from './MainTitle/MainTitle';
+import { CollectionList } from './CollectionList/CollectionList';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      React homework template
-    </div>
+    <ThemeProvider theme={theme}>
+      <Box width="998px" p="0 15px" ml="auto" mr="auto">
+        <Box pt="60px" pb="60px">
+          <MainTitle text="Heading" />
+          <CollectionList />
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };

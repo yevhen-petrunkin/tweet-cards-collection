@@ -2,7 +2,7 @@ import './fonts.css';
 
 export const theme = {
   space: [
-    -1, 0, 11, 15, 16, 20, 24, 32, 38, 48, 50, 51, 60, 61, 66, 74, 136, 139,
+    -1, 0, 11, 15, 16, 20, 24, 32, 38, 48, 50, 51, 54, 60, 61, 66, 74, 136, 139,
     334, 370,
   ],
   colors: {
@@ -14,10 +14,10 @@ export const theme = {
   fontSizes: [20, 24],
   fontWeights: [500, 600],
   lineHeights: [24, 29],
-  sizes: [1, 8, 39, 42, 43, 47, 53, 72, 88, 92, 100, 162, 226, 454, 998],
+  sizes: [1, 8, 39, 42, 43, 47, 53, 72, 88, 92, 100, 162, 226, 454],
   borders: {
     visuallyHiddenBdr: 0,
-    btnHoverBdr: `5px solid ${this.colors.accentColor}`,
+    btnHoverBdr: '5px solid #5cd3a8',
   },
   radii: [12, 24, 100],
   zIndices: [2, 3],
