@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Div = styled.div`
   position: absolute;
-  z-index: 2;
+  z-index: ${p => p.theme.zIndices[0]};
   top: ${p => p.theme.space[10]}%;
   left: ${p => p.theme.space[10]}%;
   transform: translate(-50%, -50%);

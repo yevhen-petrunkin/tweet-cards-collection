@@ -11,7 +11,7 @@ export const Div = styled.div`
     top: ${p => p.theme.space[10]}%;
     left: ${p => p.theme.space[10]}%;
     transform: translate(-50%, -50%);
-    z-index: 3;
+    z-index: ${p => p.theme.zIndices[1]};
     background-image: url(${ellipseImg});
     width: ${p => p.theme.sizes[9]}px;
     height: ${p => p.theme.sizes[9]}px;
